@@ -10,7 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class RetrieveCommand extends Command
 {
-
     protected static $defaultName = 'money:retrieve';
 
     private $moneyManager;
@@ -30,8 +29,8 @@ class RetrieveCommand extends Command
     {
         $requestedAmount = (int) $input->getArgument('moneyAmount');
 
-        echo 'Here is your '.$requestedAmount.':'.PHP_EOL;
+        echo 'Here is your ' . $requestedAmount . ':' . PHP_EOL;
         $bankNotes = $this->moneyManager->retrieveAmount($requestedAmount);
-        echo '['.join($bankNotes->getIterator(),', ').']'.PHP_EOL;
+        echo '[' . join($bankNotes->getIterator(), ', ') . ']' . PHP_EOL;
     }
 }

@@ -8,7 +8,8 @@ class Collection implements \IteratorAggregate
 {
     protected $set = [];
 
-    public function addBankNote(BankNoteInterface $bankNote){
+    public function addBankNote(BankNoteInterface $bankNote)
+    {
         $this->set[] = $bankNote;
     }
 

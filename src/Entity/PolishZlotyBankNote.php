@@ -6,26 +6,28 @@ use App\Entity\BankNote\NoteUnavailableException;
 
 class PolishZlotyBankNote implements BankNoteInterface
 {
-    public const NOMINALS = [10,20,50,100,200,500];
+    public const NOMINALS = [10, 20, 50, 100, 200, 500];
 
     protected $currency = 'PLN';
-    private $nominal=null;
+    private $nominal = null;
 
     public function __construct(int $nominal)
     {
-        if(!in_array($nominal,self::NOMINALS)){
-            throw new NoteUnavailableException('Nominal '. $nominal .' not possible with '.$this->currency.' currency');
+        if (!in_array($nominal, self::NOMINALS)) {
+            throw new NoteUnavailableException('Nominal ' . $nominal . ' not possible with ' . $this->currency . ' currency');
         }
         $this->nominal = $nominal;
+
         return $this;
     }
 
-    public function getNominal(){
+    public function getNominal()
+    {
         return $this->nominal;
     }
 
     public function __toString()
     {
-        return $this->nominal.' '.$this->currency;
+        return $this->nominal . ' ' . $this->currency;
     }
 }

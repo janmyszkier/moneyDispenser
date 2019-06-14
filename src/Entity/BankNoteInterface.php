@@ -2,8 +2,7 @@
 
 namespace App\Entity;
 
-interface BankNoteInterface {
-
+interface BankNoteInterface
+{
     public function __construct(int $nominal);
-
 }
