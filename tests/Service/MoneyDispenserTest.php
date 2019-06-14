@@ -62,6 +62,14 @@ class MoneyDispenserTest extends \PHPUnit\Framework\TestCase
         $bankNotes = $moneyDispenser->retrieveAmount(-130);
     }
 
+    public function testStringAmount()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $moneyDispenser = new MoneyDispenser();
+        $bankNotes = $moneyDispenser->retrieveAmount('test');
+    }
+
     public function testNullAmount()
     {
         $moneyDispenser = new MoneyDispenser();
