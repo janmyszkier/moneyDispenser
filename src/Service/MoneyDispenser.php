@@ -7,11 +7,15 @@ use App\Entity\PolishZlotyBankNote;
 
 class MoneyDispenser {
 
-    public function retrieveAmount($amount){
+    public function retrieveAmount($requestedAmount) : ?Collection
+    {
+        if(!$requestedAmount){
+            return null;
+        }
 
         $bankNoteCollection = new Collection();
-
-        $bankNote = new PolishZlotyBankNote($amount);
+        
+        $bankNote = new PolishZlotyBankNote($requestedAmount);
 
         $bankNoteCollection->addBankNote($bankNote);
 
