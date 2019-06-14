@@ -14,11 +14,29 @@ class MoneyDispenser {
         }
 
         $bankNoteCollection = new Collection();
-        
-        $bankNote = new PolishZlotyBankNote($requestedAmount);
 
-        $bankNoteCollection->addBankNote($bankNote);
+        $leftToRetrieve = $requestedAmount;
+        while($leftToRetrieve > 0) {
+
+            $selectedBankNote = $this->selectBiggestSupportedNominal($leftToRetrieve);
+            $bankNote = new PolishZlotyBankNote($selectedBankNote);
+            $bankNoteCollection->addBankNote($bankNote);
+
+            $leftToRetrieve -= $selectedBankNote;
+        }
 
         return $bankNoteCollection;
+    }
+
+    private function selectBiggestSupportedNominal($requestedAmount){
+
+        $possibleToPickFrom = array_filter(PolishZlotyBankNote::NOMINALS,function($nominal) use ($requestedAmount){
+            return ($nominal <= $requestedAmount) ? true : false;
+        });
+
+        /*Make sure the biggest is first */
+        rsort($possibleToPickFrom);
+
+        return reset($possibleToPickFrom);
     }
 }
