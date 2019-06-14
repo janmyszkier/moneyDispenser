@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\BankNote\BadNominalException;
+use App\Entity\BankNote\NoteUnavailableException;
 
 class PolishZlotyBankNote implements BankNoteInterface
 {
@@ -14,7 +14,7 @@ class PolishZlotyBankNote implements BankNoteInterface
     public function __construct(int $nominal)
     {
         if(!in_array($nominal,self::NOMINALS)){
-            throw new BadNominalException('Nominal '. $nominal .' not possible with '.$this->currency.' currency');
+            throw new NoteUnavailableException('Nominal '. $nominal .' not possible with '.$this->currency.' currency');
         }
         $this->nominal = $nominal;
         return $this;

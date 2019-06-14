@@ -1,7 +1,7 @@
 <?php
 
 use App\Entity\PolishZlotyBankNote;
-use App\Entity\BankNote\BadNominalException;
+use App\Entity\BankNote\NoteUnavailableException;
 
 class PolishZlotyBankNoteTest extends \PHPUnit\Framework\TestCase
 {
@@ -14,13 +14,13 @@ class PolishZlotyBankNoteTest extends \PHPUnit\Framework\TestCase
 
     public function testGet15PLNNominal()
     {
-        $this->expectException(BadNominalException::class);
+        $this->expectException(NoteUnavailableException::class);
         new PolishZlotyBankNote(15);
     }
 
     public function testNegativeNominal()
     {
-        $this->expectException(BadNominalException::class);
+        $this->expectException(NoteUnavailableException::class);
         $bankNote = new PolishZlotyBankNote(-10);
     }
 
