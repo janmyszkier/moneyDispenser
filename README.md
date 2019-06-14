@@ -26,4 +26,9 @@ php vendor/bin/phpunit
 ```
 
 
-
+#### API
+App can be run as a local server with
+```
+bin/console server:run
+```
+and then API docs are available under http://127.0.0.1:8000/api/doc
