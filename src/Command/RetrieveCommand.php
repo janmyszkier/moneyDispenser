@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Manager\Money;
+use App\Service\MoneyDispenser;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,7 +15,7 @@ class RetrieveCommand extends Command
 
     private $moneyManager;
 
-    public function __construct(Money $moneyManager)
+    public function __construct(MoneyDispenser $moneyManager)
     {
         $this->moneyManager = $moneyManager;
         parent::__construct();
@@ -28,6 +28,9 @@ class RetrieveCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        echo 'Here is your '.$this->moneyManager->retrieveAmount($input->getArgument('moneyAmount')).PHP_EOL;
+        echo 'Here is your '.$input->getArgument('moneyAmount').PHP_EOL;
+        $bankNotes = $this->moneyManager->retrieveAmount($input->getArgument('moneyAmount'));
+        echo join($bankNotes->getIterator(),PHP_EOL);
+
     }
 }
