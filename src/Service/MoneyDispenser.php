@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\BankNote\Collection;
 use App\Entity\PolishZlotyBankNote;
+use App\Service\MoneyDispenser\InvalidArgumentException;
 
 class MoneyDispenser {
 
@@ -11,6 +12,10 @@ class MoneyDispenser {
     {
         if(!$requestedAmount){
             return null;
+        }
+
+        if($requestedAmount < 0 || !is_integer($requestedAmount)){
+            throw new InvalidArgumentException();
         }
 
         $bankNoteCollection = new Collection();
