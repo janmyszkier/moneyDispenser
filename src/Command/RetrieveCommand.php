@@ -28,9 +28,10 @@ class RetrieveCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        echo 'Here is your '.$input->getArgument('moneyAmount').PHP_EOL;
-        $bankNotes = $this->moneyManager->retrieveAmount($input->getArgument('moneyAmount'));
-        echo join($bankNotes->getIterator(),PHP_EOL);
+        $requestedAmount = (int) $input->getArgument('moneyAmount');
 
+        echo 'Here is your '.$requestedAmount.':'.PHP_EOL;
+        $bankNotes = $this->moneyManager->retrieveAmount($requestedAmount);
+        echo '['.join($bankNotes->getIterator(),', ').']'.PHP_EOL;
     }
 }
