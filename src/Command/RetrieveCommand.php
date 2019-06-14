@@ -22,15 +22,18 @@ class RetrieveCommand extends Command
 
     protected function configure()
     {
-        $this->addArgument('moneyAmount', InputArgument::REQUIRED, 'How much to get?');
+        $this->addArgument('moneyAmount', InputArgument::OPTIONAL, 'How much to get?', null);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $requestedAmount = (int) $input->getArgument('moneyAmount');
 
-        echo 'Here is your ' . $requestedAmount . ':' . PHP_EOL;
         $bankNotes = $this->moneyManager->retrieveAmount($requestedAmount);
-        echo '[' . join($bankNotes->getIterator(), ', ') . ']' . PHP_EOL;
+        if ($bankNotes) {
+            echo '[' . join($bankNotes->getIterator(), ', ') . ']' . PHP_EOL;
+        } else {
+            echo '[ Empty Set ]' . PHP_EOL;
+        }
     }
 }
