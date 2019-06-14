@@ -12,3 +12,5 @@ composer.phar
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+.php_cs.cache
