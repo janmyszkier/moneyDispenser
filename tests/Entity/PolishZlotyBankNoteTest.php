@@ -15,8 +15,13 @@ class PolishZlotyBankNoteTest extends \PHPUnit\Framework\TestCase
     public function testGet15PLNNominal()
     {
         $this->expectException(BadNominalException::class);
-        $bankNote = new PolishZlotyBankNote(15);
-        $this->assertEquals(15,$bankNote->getNominal());
+        new PolishZlotyBankNote(15);
+    }
+
+    public function testNegativeNominal()
+    {
+        $this->expectException(BadNominalException::class);
+        $bankNote = new PolishZlotyBankNote(-10);
     }
 
     public function test__toString()
