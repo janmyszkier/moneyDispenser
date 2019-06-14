@@ -14,3 +14,6 @@ composer.phar
 ###< phpunit/phpunit ###
 
 .php_cs.cache
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
