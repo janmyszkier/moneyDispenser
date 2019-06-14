@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\BankNote\BadNominalException;
+
 class PolishZlotyBankNote implements BankNoteInterface
 {
     public const NOMINALS = [10,20,50,100,200,500];
@@ -11,6 +13,9 @@ class PolishZlotyBankNote implements BankNoteInterface
 
     public function __construct(int $nominal)
     {
+        if(!in_array($nominal,self::NOMINALS)){
+            throw new BadNominalException('Nominal '. $nominal .' not possible with '.$this->currency.' currency');
+        }
         $this->nominal = $nominal;
         return $this;
     }
